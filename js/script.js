@@ -59,6 +59,10 @@ new Vue({
       this.combinedLogs.push({monsterMove: monsterAttack, playerMove: ['Heal', playerHeal]});
       this.isGameOver();
     },
+    giveUp: function() {
+      alert('You have Given up!');
+      this.startStopGame();
+    },
     randomActionsValue: function (maxValue) {
       return Math.floor(Math.random()*maxValue)+1;
     },
