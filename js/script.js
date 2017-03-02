@@ -32,6 +32,7 @@ new Vue({
     attack: function() {
       monsterAttack = this.randomActionsValue(5);
       playerAttack = this.randomActionsValue(5);
+      playerHeal = 0;
       this.monsterHealth -= playerAttack;
       this.playerHealth -= monsterAttack;
       this.changeWidthsNLogs();
@@ -39,6 +40,7 @@ new Vue({
     specialAttack: function() {
       monsterAttack = this.randomActionsValue(5);
       playerAttack = this.randomActionsValue(15);
+      playerHeal = 0;
       this.monsterHealth -= playerAttack;
       this.playerHealth -= monsterAttack;
       this.changeWidthsNLogs();
@@ -54,13 +56,13 @@ new Vue({
       this.playerHealth -= monsterAttack;
       this.playerHealthBarWidth = this.playerHealth;
       this.monsterHealthBarWidth = this.monsterHealth;
-      this.combinedLogs.push({monsterMove: monsterAttack, playerMove: ['Heal', playerHeal]});
+      this.combinedLogs.unshift({monsterMove: monsterAttack, playerMove: [playerHeal, 'Heal']});
       this.isGameOver();
     },
     changeWidthsNLogs: function() {
       this.playerHealthBarWidth = this.playerHealth;
       this.monsterHealthBarWidth = this.monsterHealth;
-      this.combinedLogs.push({monsterMove: monsterAttack, playerMove: playerAttack});
+      this.combinedLogs.unshift({monsterMove: monsterAttack, playerMove: [playerAttack, '']});
       this.isGameOver();
     },
     giveUp: function() {

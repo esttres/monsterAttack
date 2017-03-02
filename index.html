@@ -46,12 +46,12 @@
             <button id="give-up" @click="giveUp" >GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="combinedLogs.length">
         <div class="small-12 columns">
             <ul>
                 <li v-for="combinedLog in combinedLogs">
-                    <p class="player-turn" v-if="combinedLog.playerMove[0]=='Heal'">Player heals himself for {{ combinedLog.playerMove[1] }} </p>
-                    <p class="player-turn" v-else>Monster takes Hit for {{ combinedLog.playerMove }} </p>
+                    <p class="player-turn" v-if="combinedLog.playerMove[1]=='Heal'">Player heals himself for {{ combinedLog.playerMove[0] }} </p>
+                    <p class="player-turn" v-else>Monster takes Hit for {{ combinedLog.playerMove[0] }} </p>
                     <p class="monster-turn">Player takes Hit for {{ combinedLog.monsterMove }} </p>
                 </li>
             </ul>
