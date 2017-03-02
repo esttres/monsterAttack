@@ -34,29 +34,33 @@ new Vue({
       playerAttack = this.randomActionsValue(5);
       this.monsterHealth -= playerAttack;
       this.playerHealth -= monsterAttack;
-      this.playerHealthBarWidth = this.playerHealth;
-      this.monsterHealthBarWidth = this.monsterHealth;
-      this.combinedLogs.push({monsterMove: monsterAttack, playerMove: playerAttack});
-      this.isGameOver();
+      this.changeWidthsNLogs();
     },
     specialAttack: function() {
       monsterAttack = this.randomActionsValue(5);
       playerAttack = this.randomActionsValue(15);
       this.monsterHealth -= playerAttack;
       this.playerHealth -= monsterAttack;
-      this.playerHealthBarWidth = this.playerHealth;
-      this.monsterHealthBarWidth = this.monsterHealth;
-      this.combinedLogs.push({monsterMove: monsterAttack, playerMove: playerAttack});
-      this.isGameOver();
+      this.changeWidthsNLogs();
     },
     heal: function() {
       monsterAttack = this.randomActionsValue(5);
       playerHeal = this.randomActionsValue(10);
-      this.playerHealth += playerHeal;
+      if (this.playerHealth + playerHeal >=100) {
+        this.playerHealth = 100
+      } else {
+        this.playerHealth += playerHeal;
+      }
       this.playerHealth -= monsterAttack;
       this.playerHealthBarWidth = this.playerHealth;
       this.monsterHealthBarWidth = this.monsterHealth;
       this.combinedLogs.push({monsterMove: monsterAttack, playerMove: ['Heal', playerHeal]});
+      this.isGameOver();
+    },
+    changeWidthsNLogs: function() {
+      this.playerHealthBarWidth = this.playerHealth;
+      this.monsterHealthBarWidth = this.monsterHealth;
+      this.combinedLogs.push({monsterMove: monsterAttack, playerMove: playerAttack});
       this.isGameOver();
     },
     giveUp: function() {
