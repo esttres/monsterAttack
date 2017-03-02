@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monster Slayer</title>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="playerHealthBarStyle">
+                <span> {{ playerHealth }} </span>
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="monsterHealthBarStyle">
+                <span> {{ monsterHealth }} </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row controls" v-if="newGame">
+        <div class="small-12 columns">
+            <button id="start-game" @click="startStopGame" >START NEW GAME</button>
+        </div>
+    </section>
+    <section class="row controls" v-else>
+        <div class="small-12 columns">
+            <button id="attack" @click="attack">ATTACK</button>
+            <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+            <button id="heal" @click="heal">HEAL</button>
+            <button id="give-up" @click="startStopGame" >GIVE UP</button>
+        </div>
+    </section>
+    <section class="row log">
+        <div class="small-12 columns">
+            <ul>
+                <li v-for="combinedLog in combinedLogs">
+                    <p class="player-turn" v-if="combinedLog.playerMove[0]=='Heal'">Player heals himself for {{ combinedLog.playerMove[1] }} </p>
+                    <p class="player-turn" v-else>Monster takes Hit for {{ combinedLog.playerMove }} </p>
+                    <p class="monster-turn">Player takes Hit for {{ combinedLog.monsterMove }} </p>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+<script src="./js/script.js"></script>
+</body>
+</html>
